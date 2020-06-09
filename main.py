@@ -71,9 +71,9 @@ async def get_info(ctx):
     lst.sort(key=lambda i: i[1], reverse=True)
     # Создаём из словаря список кортежей вида "(слово, кол-во повторений)" для того, чтобы его можно было отсортировать.
     comment = morph.parse('повторение')[0]
-    await ctx.send(f'Приуэт! Топ-5 слов на этом канале: \n 1.) "{lst[0][0]}", {lst[0][1]} {comment.make_agree_with_number(lst[0][1]).word} \n'
-                   f'2.) "{lst[1][0]}", {lst[1][1]} {comment.make_agree_with_number(lst[1][1]).word} \n 3.) "{lst[2][0]}", {lst[2][1]} {comment.make_agree_with_number(lst[2][1]).word} \n'
-                   f'4.) "{lst[3][0]}", {lst[3][1]} {comment.make_agree_with_number(lst[3][1]).word} \n 5.) "{lst[4][0]}", {lst[4][1]} {comment.make_agree_with_number(lst[4][1]).word} \n',
+    await ctx.send(f'Приуэт! Топ-5 слов на этом канале:\n1.) "{lst[0][0]}", {lst[0][1]} {comment.make_agree_with_number(lst[0][1]).word}\n'
+                   f'2.) "{lst[1][0]}", {lst[1][1]} {comment.make_agree_with_number(lst[1][1]).word}\n3.) "{lst[2][0]}", {lst[2][1]} {comment.make_agree_with_number(lst[2][1]).word}\n'
+                   f'4.) "{lst[3][0]}", {lst[3][1]} {comment.make_agree_with_number(lst[3][1]).word}\n5.) "{lst[4][0]}", {lst[4][1]} {comment.make_agree_with_number(lst[4][1]).word}\n',
                    file=discord.File('info.png'))
     # Приводим слова в соответствие с чилительными и отправляем
 
