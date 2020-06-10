@@ -59,6 +59,28 @@ async def get_info(ctx):
     # Создаем график типа bar
     plt.xticks(x, ('Сущ', 'Мест', 'Глаг', 'Прил', 'Нареч', 'Пред', 'Союз'))
     # Подписываем столбцы
+    ax.set_title('Количество слов по частям речи:')
+    plt.savefig('info.png')
+    # Сохраняем график
+
+    for i in range(len(messages_data)):
+        messages_data[i] = (morph.parse(messages_data[i])[0]).normal_form
+    # Приводим слова в исходную форму
+    data = {}
+    for i in Counter(messages_data):
+        if "NPRO" not in morph.parse(i)[0].tag and "PREP" not in morph.parse(i)[0].tag \
+                and "CONJ" not in morph.parse(i)[0].tag:
+            data[i] = messages_data.count(i)
+    # Формируем словарь, ключами которого являются слова, а значениями - количество их повторений
+    lst = list(data.items())
+    lst.sort(key=lambda i: i[1], reverse=True)
+    # Создаём из словаря список кортежей вида "(слово, кол-во повторений)" для того, чтобы его можно было отсортировать.
+    comment = morph.parse('повторение')[0]
+    await ctx.send(f'Приуэт! Топ-5 слов на этом канале:\n1.) "{lst[0][0]}", {lst[0][1]} {comment.make_agree_with_number(lst[0][1]).word}\n'
+                   f'2.) "{lst[1][0]}", {lst[1][1]} {comment.make_agree_with_number(lst[1][1]).word}\n3.) "{lst[2][0]}", {lst[2][1]} {comment.make_agree_with_number(lst[2][1]).word}\n'
+                   f'4.) "{lst[3][0]}", {lst[3][1]} {comment.make_agree_with_number(lst[3][1]).word}\n5.) "{lst[4][0]}", {lst[4][1]} {comment.make_agree_with_number(lst[4][1]).word}\n',
+                   file=discord.File('info.png'))
+    # Приводим слова в соответствие с чилительными и отправляем
     plt.savefig('info.jpg')
     # Сохраняем график
     await ctx.send('Держи, хорошего дня:3', file=discord.File('info.jpg'))
