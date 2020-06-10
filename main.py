@@ -81,10 +81,6 @@ async def get_info(ctx):
                    f'4.) "{lst[3][0]}", {lst[3][1]} {comment.make_agree_with_number(lst[3][1]).word}\n5.) "{lst[4][0]}", {lst[4][1]} {comment.make_agree_with_number(lst[4][1]).word}\n',
                    file=discord.File('info.png'))
     # Приводим слова в соответствие с чилительными и отправляем
-    plt.savefig('info.jpg')
-    # Сохраняем график
-    await ctx.send('Держи, хорошего дня:3', file=discord.File('info.jpg'))
-    # Отправляем сообщение
 
 
 @client.command()
